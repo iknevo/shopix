@@ -14,6 +14,7 @@
   --popover: oklch(0.9911 0 0);
   --popover-foreground: oklch(0.2435 0 0);
   --primary: oklch(0.4341 0.0392 41.9938);
+  --primary-hover: oklch(0.3841 0.0392 41.9938);
   --primary-foreground: oklch(1 0 0);
   --secondary: oklch(0.92 0.0651 74.3695);
   --secondary-foreground: oklch(0.3499 0.0685 40.8288);
@@ -74,6 +75,7 @@
   --popover: oklch(0.2134 0 0);
   --popover-foreground: oklch(0.9491 0 0);
   --primary: oklch(0.9247 0.0524 66.1732);
+  --primary-hover: oklch(0.8 0.05 41.9938);
   --primary-foreground: oklch(0.2029 0.024 200.1962);
   --secondary: oklch(0.3163 0.019 63.6992);
   --secondary-foreground: oklch(0.9247 0.0524 66.1732);
@@ -188,5 +190,27 @@
 
   body {
     @apply bg-background text-foreground;
+  }
+
+  ::selection {
+    background-color: var(--color-foreground);
+    color: var(--color-foreground);
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: var(--color-grey-light);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary-hover);
+    cursor: pointer;
   }
 }

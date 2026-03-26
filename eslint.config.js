@@ -1,14 +1,22 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
-import { defineConfig, globalIgnores } from 'eslint/config'
+import js from "@eslint/js"
+import globals from "globals"
+import reactHooks from "eslint-plugin-react-hooks"
+import reactRefresh from "eslint-plugin-react-refresh"
+import tseslint from "typescript-eslint"
+import { defineConfig, globalIgnores } from "eslint/config"
+import query from "@tanstack/eslint-plugin-query"
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(["dist"]),
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ["**/*.{ts,tsx}"],
+    plugins: {
+      "@tanstack/query": query,
+    },
+    rules: {
+      ...query.configs.recommended.rules,
+      "@tanstack/query/exhaustive-deps": "error",
+    },
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,

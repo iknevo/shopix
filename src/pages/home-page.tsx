@@ -1,9 +1,11 @@
 import HeroSection from "@/components/home/hero"
+import HomeProducts from "@/features/products/components/home-products"
 
 export default function HomePage() {
   return (
-    <div>
+    <section>
       <HeroSection />
-    </div>
+      <HomeProducts />
+    </section>
   )
 }
