@@ -10,7 +10,7 @@ type Props = {
 
 export default function ProductCard({ product }: Props) {
   return (
-    <Card className="group overflow-hidden rounded-md border py-0 pt-0 transition hover:shadow-lg md:py-4">
+    <Card className="group gap-1 overflow-hidden rounded-md border py-0 pt-0 transition hover:shadow-lg md:gap-4 md:py-4">
       <div className="relative aspect-square overflow-hidden bg-muted">
         <img
           src={product.thumbnail}
