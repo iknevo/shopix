@@ -3,18 +3,23 @@ import { getProducts } from "./products"
 import { productsLimit } from "@/config/constants"
 
 type Props = {
-  category: string | null
+  category: string
   page: number
+  sortBy: string
+  order: string
 }
-export function useGetProducts({ category, page = 1 }: Props) {
+
+export function useGetProducts({ category, page, sortBy, order }: Props) {
   const query = useQuery({
-    queryKey: ["products", category, page],
+    queryKey: ["products", category, page, sortBy, order],
     queryFn: async () =>
-      getProducts({ category, limit: productsLimit, skip: (page - 1) * productsLimit }),
+      getProducts({
+        category,
+        limit: productsLimit,
+        skip: (page - 1) * productsLimit,
+        sort: { sortBy, order },
+      }),
   })
-  const total = query.data?.total ?? 0
-  const pagesCount = Math.ceil(total / productsLimit)
-  console.log({ total, pagesCount })
 
   return query
 }

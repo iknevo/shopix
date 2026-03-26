@@ -3,18 +3,31 @@ import type { ProductsResponse } from "@/types/product"
 import { toast } from "sonner"
 
 type AllProductsProps = {
-  category: string | null
+  category: string
   limit: number
   skip: number
+  sort: {
+    sortBy: string
+    order: string
+  }
 }
+
 export async function getProducts({
   category,
   limit,
   skip,
+  sort,
 }: AllProductsProps): Promise<ProductsResponse> {
-  let url = "/products"
-  if (category) url += `/category/${category}`
-  url += `?limit=${limit}&skip=${skip}`
+  const baseUrl = category ? `/products/category/${category}` : "/products"
+
+  const params = new URLSearchParams({
+    limit: String(limit),
+    skip: String(skip),
+    ...(sort.sortBy && { sortBy: sort.sortBy }),
+    ...(sort.order && { order: sort.order }),
+  })
+
+  const url = `${baseUrl}?${params.toString()}`
 
   try {
     const res = await api.get(url)

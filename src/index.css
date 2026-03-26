@@ -179,6 +179,10 @@
   --shadow-2xl: var(--shadow-2xl);
 }
 
+@theme {
+  --breakpoint-xs: 30rem;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -193,8 +197,8 @@
   }
 
   ::selection {
-    background-color: var(--color-foreground);
-    color: var(--color-foreground);
+    background-color: var(--color-primary);
+    color: var(--color-primary-foreground);
   }
 
   ::-webkit-scrollbar {

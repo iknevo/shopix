@@ -19,7 +19,7 @@ export default function ProductCard({ product }: Props) {
         />
 
         {product.discountPercentage > 0 && (
-          <Badge className="absolute top-2 left-2">
+          <Badge className="absolute top-2 right-2">
             -{Math.round(product.discountPercentage)}%
           </Badge>
         )}

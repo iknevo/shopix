@@ -8,10 +8,10 @@ import {
 } from "@/components/ui/pagination"
 import { paginationChunkSize, productsLimit } from "@/config/constants"
 import { useQueryClient } from "@tanstack/react-query"
-import { useQueryState } from "nuqs"
 import { getProducts } from "../api/products"
 import { cn } from "@/lib/utils"
 import { TypographyP } from "@/components/typography"
+import { useProductFilters } from "@/hooks/use-products-filters"
 
 type Props = {
   page: number
@@ -23,7 +23,8 @@ type Props = {
 export default function ProductsPagination({ page, total, limit, onPageChange }: Props) {
   const totalPages = Math.ceil(total / limit)
   const queryClient = useQueryClient()
-  const [category] = useQueryState("category")
+
+  const { sortBy, order, category } = useProductFilters()
   const start = (page - 1) * limit + 1
   const end = Math.min(page * limit, total)
   const currentChunk = Math.floor((page - 1) / paginationChunkSize)
@@ -49,12 +50,14 @@ export default function ProductsPagination({ page, total, limit, onPageChange }:
               }}
               onMouseEnter={() => {
                 queryClient.prefetchQuery({
-                  queryKey: ["products", category, page - 1],
+                  queryKey: ["products", category, page - 1, sortBy, order],
+
                   queryFn: () =>
                     getProducts({
                       category,
                       limit: productsLimit,
                       skip: (page - 1) * productsLimit,
+                      sort: { sortBy, order },
                     }),
                 })
               }}
@@ -72,12 +75,13 @@ export default function ProductsPagination({ page, total, limit, onPageChange }:
                   if (p === page) return
 
                   queryClient.prefetchQuery({
-                    queryKey: ["products", category, p],
+                    queryKey: ["products", category, p, sortBy, order],
                     queryFn: () =>
                       getProducts({
                         category,
                         limit: productsLimit,
                         skip: (p - 1) * productsLimit,
+                        sort: { sortBy, order },
                       }),
                   })
                 }}
@@ -96,12 +100,14 @@ export default function ProductsPagination({ page, total, limit, onPageChange }:
               }}
               onMouseEnter={() => {
                 queryClient.prefetchQuery({
-                  queryKey: ["products", category, page + 1],
+                  queryKey: ["products", category, page + 1, sortBy, order],
+
                   queryFn: () =>
                     getProducts({
                       category,
                       limit: productsLimit,
                       skip: (page + 1) * productsLimit,
+                      sort: { sortBy, order },
                     }),
                 })
               }}
