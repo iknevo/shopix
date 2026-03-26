@@ -25,7 +25,7 @@ export default function Section({
     <section className={cn("scroll-mt-16 py-10 md:py-14", className)} {...props}>
       <div className={cn("container mx-auto px-4", containerClassName)}>
         {(title || action) && (
-          <div className="mb-6 flex items-center justify-between gap-4">
+          <div className="mb-6 flex flex-col justify-between gap-4 md:flex-row md:items-center">
             <div>
               {title && (
                 <H2 className="text-xl font-semibold tracking-tight md:text-2xl">{title}</H2>
