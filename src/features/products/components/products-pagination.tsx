@@ -48,7 +48,6 @@ export default function ProductsPagination({ page, total, limit, onPageChange }:
                 onPageChange(page - 1)
               }}
               onMouseEnter={() => {
-                if (page === 1) return
                 queryClient.prefetchQuery({
                   queryKey: ["products", category, page - 1],
                   queryFn: () =>
@@ -96,7 +95,6 @@ export default function ProductsPagination({ page, total, limit, onPageChange }:
                 onPageChange(page + 1)
               }}
               onMouseEnter={() => {
-                if (page === totalPages) return
                 queryClient.prefetchQuery({
                   queryKey: ["products", category, page + 1],
                   queryFn: () =>
