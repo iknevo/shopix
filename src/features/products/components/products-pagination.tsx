@@ -37,8 +37,16 @@ export default function ProductsPagination({ page, total, limit, onPageChange }:
 
   return (
     <div className="flex items-center justify-between">
-      <TypographyP>
-        Showing {start}–{end} of {total} products ( Page {page} of {totalPages} )
+      <TypographyP className="text-sm text-muted-foreground sm:text-base">
+        Showing{" "}
+        <span className="font-medium">
+          {start}–{end}
+        </span>{" "}
+        of <span className="font-medium">{total}</span>
+        <span className="hidden sm:inline">
+          {" "}
+          (Page {page} of {totalPages})
+        </span>
       </TypographyP>
       <Pagination className="mx-0 w-fit justify-end">
         <PaginationContent>
