@@ -10,7 +10,7 @@ type Props = {
 
 export default function ProductCard({ product }: Props) {
   return (
-    <Card className="group overflow-hidden rounded-2xl border pt-0 transition hover:shadow-lg">
+    <Card className="group overflow-hidden rounded-md border py-0 pt-0 transition hover:shadow-lg md:py-4">
       <div className="relative aspect-square overflow-hidden bg-muted">
         <img
           src={product.thumbnail}
@@ -25,7 +25,7 @@ export default function ProductCard({ product }: Props) {
         )}
       </div>
 
-      <CardContent className="space-y-3 p-4">
+      <CardContent className="space-y-3 p-2 md:p-4">
         <h3 className="line-clamp-1 text-sm font-medium">{product.title}</h3>
 
         <p className="text-xs text-muted-foreground">{product.brand}</p>
