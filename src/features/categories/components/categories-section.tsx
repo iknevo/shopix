@@ -5,10 +5,21 @@ import { Tag } from "lucide-react"
 import { useFiltersParams } from "@/hooks/use-filters-params"
 import CategoriesSkeleton from "./categories-skeleton"
 import { Link } from "react-router-dom"
+import { useHead } from "@unhead/react"
 
 export default function CategoriesSection() {
   const { data: categories = [], isLoading } = useGetCategoris()
   const { setCategory } = useFiltersParams()
+
+  useHead({
+    title: "Shopix - Categories",
+    meta: [
+      {
+        name: "description",
+        content: "Check all categories",
+      },
+    ],
+  })
 
   if (isLoading) {
     return (

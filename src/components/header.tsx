@@ -5,9 +5,12 @@ import Nav from "@/components/nav"
 import { Badge } from "@/components/ui/badge"
 import ThemeToggle from "./ui/theme-button"
 import { useCartStore } from "@/state/use-cart-store"
+import { useAuthStore } from "@/state/use-auth-store"
 
 export default function Header() {
   const numItemsInCart = useCartStore((state) => state.cart).length
+  const { checkLoggedIn } = useAuthStore()
+  const isLoggedIn = checkLoggedIn()
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur">
@@ -37,10 +40,18 @@ export default function Header() {
             </Link>
           </Button>
 
-          <Button variant="ghost" size="icon">
-            <User />
-          </Button>
           <ThemeToggle />
+          {isLoggedIn ? (
+            <Button variant="ghost" size="icon" asChild>
+              <Link to="/profile">
+                <User />
+              </Link>
+            </Button>
+          ) : (
+            <Button asChild>
+              <Link to="/login">LOGIN</Link>
+            </Button>
+          )}
         </div>
       </div>
     </header>

@@ -10,6 +10,7 @@ import ProductDetailsSkeleton from "./product-details-skeleton"
 import ProductNotFound from "./product-not-found"
 import { useCartStore } from "@/state/use-cart-store"
 import { cn } from "@/lib/utils"
+import { useHead } from "@unhead/react"
 
 export default function ProductDetails() {
   const { id } = useParams()
@@ -36,6 +37,16 @@ export default function ProductDetails() {
       })
     }
   }
+
+  useHead({
+    title: "Shopix - Product details",
+    meta: [
+      {
+        name: "description",
+        content: "product details",
+      },
+    ],
+  })
 
   if (isLoading) return <ProductDetailsSkeleton />
   if (isError || !product) return <ProductNotFound />

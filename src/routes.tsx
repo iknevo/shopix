@@ -6,6 +6,9 @@ import ProductsSection from "./features/products/components/products-section"
 import CategoriesSection from "./features/categories/components/categories-section"
 import ProductDetails from "./features/products/components/product-details"
 import CartPage from "./features/cart/components/cart-page"
+import LoginPage from "./features/auth/components/login-page"
+import ProtectedRoute from "./features/auth/components/protected-route"
+import ProfilePage from "./features/profile/components/profile-page"
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +33,18 @@ export const router = createBrowserRouter([
       {
         path: "cart",
         element: <CartPage />,
+      },
+      {
+        path: "login",
+        element: <LoginPage />,
+      },
+      {
+        path: "profile",
+        element: (
+          <ProtectedRoute>
+            <ProfilePage />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "*",

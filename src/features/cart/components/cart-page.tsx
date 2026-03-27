@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import { useCartStore } from "@/state/use-cart-store"
+import { useHead } from "@unhead/react"
 import { Minus, Plus, Trash } from "lucide-react"
 import { Link } from "react-router-dom"
 
@@ -18,6 +19,16 @@ export default function CartPage() {
 
   const total = getTotalCartPrice()
   const totalItems = cart.length
+
+  useHead({
+    title: "Shopix - Cart",
+    meta: [
+      {
+        name: "description",
+        content: "Your cart",
+      },
+    ],
+  })
 
   if (cart.length === 0) {
     return (

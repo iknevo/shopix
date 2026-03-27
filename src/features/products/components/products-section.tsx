@@ -7,6 +7,7 @@ import { productsLimit } from "@/config/constants"
 import { useRef } from "react"
 import ProductsActions from "./product-actions"
 import { useFiltersParams } from "@/hooks/use-filters-params"
+import { useHead } from "@unhead/react"
 
 export default function ProductsSection() {
   const { category, sortBy, order, page, setParams, resetFilters } = useFiltersParams()
@@ -30,6 +31,16 @@ export default function ProductsSection() {
   }
 
   const isEmpty = !isLoading && !isError && data?.products.length === 0
+
+  useHead({
+    title: "Shopix - Shop",
+    meta: [
+      {
+        name: "description",
+        content: "Shop All Products",
+      },
+    ],
+  })
 
   return (
     <Section
