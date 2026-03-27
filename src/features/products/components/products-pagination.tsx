@@ -11,7 +11,7 @@ import { useQueryClient } from "@tanstack/react-query"
 import { getProducts } from "../api/products"
 import { cn } from "@/lib/utils"
 import { TypographyP } from "@/components/typography"
-import { useProductFilters } from "@/hooks/use-products-filters"
+import { useFiltersParams } from "@/hooks/use-filters-params"
 
 type Props = {
   page: number
@@ -24,7 +24,7 @@ export default function ProductsPagination({ page, total, limit, onPageChange }:
   const totalPages = Math.ceil(total / limit)
   const queryClient = useQueryClient()
 
-  const { sortBy, order, category } = useProductFilters()
+  const { sortBy, order, category } = useFiltersParams()
   const start = (page - 1) * limit + 1
   const end = Math.min(page * limit, total)
   const currentChunk = Math.floor((page - 1) / paginationChunkSize)

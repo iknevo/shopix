@@ -6,10 +6,10 @@ import ProductsPagination from "./products-pagination"
 import { productsLimit } from "@/config/constants"
 import { useRef } from "react"
 import ProductsActions from "./product-actions"
-import { useProductFilters } from "@/hooks/use-products-filters"
+import { useFiltersParams } from "@/hooks/use-filters-params"
 
-export default function HomeProducts() {
-  const { category, sortBy, order, page, setParams, resetFilters } = useProductFilters()
+export default function ProductsSection() {
+  const { category, sortBy, order, page, setParams, resetFilters } = useFiltersParams()
 
   const { data, isLoading, isError, refetch } = useGetProducts({
     category,

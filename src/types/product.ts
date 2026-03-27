@@ -52,3 +52,13 @@ export type ProductsResponse = {
   skip: number
   limit: number
 }
+
+export type Review = {
+  rating: number
+  comment: string
+  date: string
+  reviewerName: string
+  reviewerEmail: string
+}
+
+export type ProductReviews = Review[]

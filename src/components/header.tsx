@@ -4,8 +4,11 @@ import { Link } from "react-router-dom"
 import Nav from "@/components/nav"
 import { Badge } from "@/components/ui/badge"
 import ThemeToggle from "./ui/theme-button"
+import { useCartStore } from "@/state/use-cart-store"
 
 export default function Header() {
+  const numItemsInCart = useCartStore((state) => state.cart).length
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur">
       <div className="container mx-auto flex h-16 items-center gap-4 px-4">
@@ -21,10 +24,17 @@ export default function Header() {
 
         <div className="ml-auto flex items-center gap-2">
           <Button variant="ghost" size="icon" className="relative">
-            <ShoppingCart />
-            <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full" variant="secondary">
-              2
-            </Badge>
+            <Link to="/cart">
+              <ShoppingCart />
+              {numItemsInCart > 0 && (
+                <Badge
+                  className="absolute -top-2 -right-2 h-5 w-5 rounded-full"
+                  variant="secondary"
+                >
+                  {numItemsInCart}
+                </Badge>
+              )}
+            </Link>
           </Button>
 
           <Button variant="ghost" size="icon">

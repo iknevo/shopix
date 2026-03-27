@@ -6,7 +6,7 @@ import {
   ComboboxItem,
   ComboboxList,
 } from "@/components/ui/combobox"
-import { useProductFilters } from "@/hooks/use-products-filters"
+import { useFiltersParams } from "@/hooks/use-filters-params"
 
 const SORT_OPTIONS = [
   { label: "Title: A-Z", value: "title", order: "asc" },
@@ -16,7 +16,7 @@ const SORT_OPTIONS = [
 ]
 
 export default function SortFilter() {
-  const { setSort, sortBy, order } = useProductFilters()
+  const { setSort, sortBy, order } = useFiltersParams()
 
   const selectedOption = SORT_OPTIONS.find((opt) => opt.value === sortBy && opt.order === order)
 

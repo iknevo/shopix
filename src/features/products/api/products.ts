@@ -1,5 +1,5 @@
 import { api } from "@/lib/axios"
-import type { ProductsResponse } from "@/types/product"
+import type { Product, ProductsResponse } from "@/types/product"
 import { toast } from "sonner"
 
 type AllProductsProps = {
@@ -28,12 +28,22 @@ export async function getProducts({
   })
 
   const url = `${baseUrl}?${params.toString()}`
-
   try {
     const res = await api.get(url)
     return res.data
   } catch {
     toast.error("Failed to fetch products")
     throw new Error("Failed to fetch products")
+  }
+}
+
+export async function getProductById(id: number): Promise<Product> {
+  const url = `/products/${id}`
+  try {
+    const res = await api.get(url)
+    return res.data
+  } catch {
+    toast.error("Failed to fetch product")
+    throw new Error("Failed to fetch product")
   }
 }

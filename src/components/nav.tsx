@@ -17,7 +17,6 @@ const navLinks = [
   { name: "Home", path: "/" },
   { name: "Shop", path: "/shop" },
   { name: "Categories", path: "/categories" },
-  { name: "Deals", path: "/deals" },
 ]
 
 export default function Nav() {

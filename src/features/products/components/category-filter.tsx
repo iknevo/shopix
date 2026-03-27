@@ -7,20 +7,22 @@ import {
   ComboboxList,
 } from "@/components/ui/combobox"
 import { useGetCategoris } from "@/features/categories/api/use-get-categories"
-import { useProductFilters } from "@/hooks/use-products-filters"
+import { useFiltersParams } from "@/hooks/use-filters-params"
 import type { Category } from "@/types/category"
 
 export default function CategoryFilter() {
-  const { category, setCategory } = useProductFilters()
+  const { category, setCategory } = useFiltersParams()
   const { data: categories = [], isLoading } = useGetCategoris()
 
   return (
     <Combobox
       items={categories}
-      value={category
-        .split("-")
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-        .join(" ")}
+      value={
+        category
+          .split("-")
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ") || null
+      }
       onValueChange={(val) => setCategory(val ?? "")}
       autoHighlight
     >

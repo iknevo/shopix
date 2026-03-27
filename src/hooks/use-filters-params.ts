@@ -1,6 +1,6 @@
 import { useQueryStates } from "nuqs"
 
-export function useProductFilters() {
+export function useFiltersParams() {
   const [params, setParams] = useQueryStates({
     category: { defaultValue: "", parse: String },
     sortBy: { defaultValue: "", parse: String },
