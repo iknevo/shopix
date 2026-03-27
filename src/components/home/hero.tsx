@@ -1,6 +1,7 @@
 import { HeroImg } from "@/assets"
 import { Button } from "@/components/ui/button"
 import { Flame, Landmark, RefreshCw, Truck } from "lucide-react"
+import { Link } from "react-router-dom"
 
 export default function HeroSection() {
   return (
@@ -22,11 +23,11 @@ export default function HeroSection() {
 
             <div className="flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
               <Button size="lg" className="px-8">
-                Shop Now
+                <Link to="/shop">Shop Now</Link>
               </Button>
 
               <Button variant="outline" size="lg" className="px-8">
-                Browse Categories
+                <Link to="/categories">Browse Categories</Link>
               </Button>
             </div>
 
