@@ -46,7 +46,7 @@ export default function CartPage() {
             </Button>
           </div>
 
-          <ScrollArea className="h-[70vh] pr-3">
+          <ScrollArea className="max-h-[70vh] overflow-y-scroll pr-3">
             <div className="space-y-4">
               {cart.map((item) => (
                 <div
