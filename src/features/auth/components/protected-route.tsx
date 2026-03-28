@@ -3,20 +3,24 @@ import { useEffect, type ReactNode } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 
 export default function ProtectedRoute({ children }: { children: ReactNode }) {
-  const { checkLoggedIn } = useAuthStore()
-  const isLoggedIn = checkLoggedIn()
+  const { accessToken } = useAuthStore()
+  const hasHydrated = useAuthStore.persist.hasHydrated()
 
   const navigate = useNavigate()
   const location = useLocation()
 
+  const isLoggedIn = !!accessToken
+
   useEffect(() => {
-    if (!isLoggedIn) {
+    if (hasHydrated && !isLoggedIn) {
       navigate("/login", {
         state: { from: location.pathname },
         replace: true,
       })
     }
-  }, [isLoggedIn, navigate, location])
+  }, [hasHydrated, isLoggedIn, navigate, location])
+
+  if (!hasHydrated) return null
 
   return children
 }

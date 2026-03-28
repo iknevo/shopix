@@ -27,36 +27,33 @@ export default function LoginPage() {
   const navigate = useNavigate()
   const location = useLocation()
   const from = location.state?.from || "/"
+
   const [showPassword, setShowPassword] = useState(false)
   const { mutate: login, isPending } = useLogin()
-  const { setUser, setAccessToken } = useAuthStore()
+
+  const { setAccessToken } = useAuthStore()
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
-    defaultValues: {
-      username: "",
-      password: "",
-    },
   })
 
   const isLoading = isPending || isSubmitting
-  const onSubmit = async (data: FormValues) => {
-    login(data, {
+
+  const onSubmit = (formData: FormValues) => {
+    login(formData, {
       onSuccess: (data) => {
-        const { accessToken, id, email, username, firstName, lastName, image, gender } = data
+        const { accessToken, refreshToken } = data
+
         setAccessToken(accessToken)
-        setUser({
-          id,
-          email,
-          username,
-          firstName,
-          lastName,
-          image,
-          gender,
-        })
+
+        if (refreshToken) {
+          localStorage.setItem("refreshToken", refreshToken)
+        }
+
         navigate(from, { replace: true })
       },
     })
@@ -95,12 +92,7 @@ export default function LoginPage() {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               <div className="space-y-2">
                 <Label>User name</Label>
-                <Input
-                  placeholder="username"
-                  type="text"
-                  autoComplete="username"
-                  {...register("username")}
-                />
+                <Input placeholder="username" autoComplete="username" {...register("username")} />
                 {errors.username && (
                   <p className="text-xs text-red-500">{errors.username.message}</p>
                 )}

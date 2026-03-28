@@ -23,3 +23,12 @@ export async function login({ username, password }: Props): Promise<UserResponse
     throw new Error("Failed to login")
   }
 }
+
+export async function getUser(): Promise<UserResponse> {
+  try {
+    const res = await api.get("/auth/me")
+    return res.data
+  } catch {
+    throw new Error("Failed to login")
+  }
+}

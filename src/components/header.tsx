@@ -1,16 +1,19 @@
 import { Button } from "@/components/ui/button"
-import { ShoppingCart, User } from "lucide-react"
+import { Loader2, ShoppingCart, User } from "lucide-react"
 import { Link } from "react-router-dom"
 import Nav from "@/components/nav"
 import { Badge } from "@/components/ui/badge"
 import ThemeToggle from "./ui/theme-button"
 import { useCartStore } from "@/state/use-cart-store"
 import { useAuthStore } from "@/state/use-auth-store"
+import { useMe } from "@/features/auth/api/use-me"
 
 export default function Header() {
   const numItemsInCart = useCartStore((state) => state.cart).length
-  const { checkLoggedIn } = useAuthStore()
-  const isLoggedIn = checkLoggedIn()
+  const { accessToken } = useAuthStore()
+  const { isLoading } = useMe(accessToken)
+
+  const isLoggedIn = !!accessToken
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur">
@@ -41,7 +44,11 @@ export default function Header() {
           </Button>
 
           <ThemeToggle />
-          {isLoggedIn ? (
+          {isLoading ? (
+            <Button variant="ghost" size="icon" asChild>
+              <Loader2 className="h-6 w-6 animate-spin" />
+            </Button>
+          ) : isLoggedIn ? (
             <Button variant="ghost" size="icon" asChild>
               <Link to="/profile">
                 <User />
